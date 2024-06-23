@@ -5,7 +5,7 @@
 from typing import Tuple
 
 
-def index_range(page:int, page_size:int) -> Tuple[int,int]:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
         return a tuple of size two containing
         a start index and an end index corresponding
@@ -13,5 +13,5 @@ def index_range(page:int, page_size:int) -> Tuple[int,int]:
         a list for those particular pagination parameters
     """
     Start = (page - 1) * page_size
-    End  = page * page_size
+    End = page * page_size
     return (Start, End)
