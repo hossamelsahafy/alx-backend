@@ -5,6 +5,7 @@ Simple helper function and Server class for pagination.
 from typing import Tuple, List
 import csv
 
+
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     Return a tuple of size two containing
@@ -15,6 +16,7 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     start = (page - 1) * page_size
     end = page * page_size
     return (start, end)
+
 
 class Server:
     """
@@ -39,10 +41,13 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Returns a page of the dataset based on pagination parameters.
+        Returns a page of the dataset based on
+        pagination parameters.
         """
-        assert isinstance(page, int) and page > 0, "Page must be an integer greater than 0"
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be an integer greater than 0"
+        assert isinstance(page, int) and page > 0, \
+            "Page must be an integer greater than 0"
+        assert isinstance(page_size, int) and page_size > 0, \
+            "Page size must be an integer greater than 0"
 
         dataset = self.dataset()
         total_items = len(dataset)
