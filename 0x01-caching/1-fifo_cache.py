@@ -16,7 +16,7 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         """Put Method"""
         if key is not None and item is not None:
-            if len(self.cache_data) > self.MAX_ITEMS:
+            if len(self.cache_data) >= self.MAX_ITEMS:
                 old = next(iter(self.cache_data))
                 print("DISCARD: {}".format(old))
                 del self.cache_data[old]
