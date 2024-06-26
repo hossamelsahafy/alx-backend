@@ -2,13 +2,11 @@
 """
     Basic dictionary
 """
-BaseCaching = __import__('BaseCaching').BaseCaching
+from BaseCaching import BaseCaching
 
 
 class BasicCache(BaseCaching):
     """Define Basicache Class"""
-
-
     def put(self, key, item):
         """Put Method"""
         if key is not None and item is not None:
