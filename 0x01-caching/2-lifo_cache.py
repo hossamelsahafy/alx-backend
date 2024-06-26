@@ -23,4 +23,5 @@ class LIFOCache(BaseCaching):
             self.cache_data.move_to_end(key, last=True)
 
     def get(self, key):
+        """Get Method"""
         return self.cache_data.get(key, None)
