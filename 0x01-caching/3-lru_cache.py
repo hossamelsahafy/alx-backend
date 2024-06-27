@@ -18,8 +18,9 @@ class LRUCache(BaseCaching):
         """Put Method"""
         if key is not None and item is not None:
             if len(self.cache_data) >= self.MAX_ITEMS:
-                last = self.cache_data.popitem(last = False)
-                print("DISCARD: {}".format(last[0]))
+                last = next(iter(self.cache_data))
+                print("DISCARD: {}".format(last))
+                del self.cache_data[last]
             self.cache_data[key] = item
             self.cache_data.move_to_end(key)
 
