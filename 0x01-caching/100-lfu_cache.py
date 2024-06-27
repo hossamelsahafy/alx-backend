@@ -9,13 +9,16 @@ class LFUCache (BaseCaching):
     """
         Defien Class LFUCache
     """
+
     def __init__(self):
+        """__init__ Method"""
         super().__init__()
         self.freq = {}
         self.freq_of_keys = {}
         self.min_freq = 0
 
     def put(self, key, item):
+        """Put Method"""
         if key is None or item is None:
             return
 
@@ -38,6 +41,7 @@ class LFUCache (BaseCaching):
             self.min_freq = 1
 
     def get(self, key):
+        """Get Method"""
         if key is None or key not in self.cache_data:
             return None
 
