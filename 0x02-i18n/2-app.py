@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Basic Flask app
+    Basic Flask app
 """
 
 from flask import Flask, render_template, request
@@ -22,7 +22,7 @@ babel = Babel(app)
 
 def get_locale():
     """
-    Method that returns the best match
+        Method that returns the best match
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -33,7 +33,7 @@ babel.locale_selector_func = get_locale
 @app.route('/')
 def index():
     """
-    Method that returns the template
+        Method that returns the template
     """
     return render_template('2-index.html')
 
