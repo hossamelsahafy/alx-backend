@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-    A Basic flask application
+    Mock logging in
 """
 from flask import Flask, request, render_template, g
-from flask_babel import Babel, gettext
-from typing import (Dict, Union, Optional)
+from flask_babel import Babel
+from typing import Union, Dict
 
 
 users = {
@@ -44,11 +44,10 @@ def get_locale() -> str:
 babel.locale_selector_func = get_locale
 
 
-def get_user() -> Optional[Dict[str, Optional[str]]]:
+def get_user() -> Union[Dict[str, Union[str, None]], None]:
     """
-        Returns a user dictionary or None if the
-        ID cannot be found or if login_as
-        was not passed.
+        Returns a user dictionary or None if
+        the ID cannot be found or if login_as was not passed.
     """
     try:
         user_id = int(request.args.get('login_as'))
