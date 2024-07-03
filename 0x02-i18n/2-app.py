@@ -21,7 +21,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_locale() ->str:
+def get_locale() -> str:
     """
         Method that returns the best match
     """
