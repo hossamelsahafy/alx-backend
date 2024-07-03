@@ -24,15 +24,15 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale() -> str:
     """
-    Method that returns the best match
+        Method that returns the best match
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() ->  str:
     """
-    Method that returns the template
+        Method that returns the template
     """
     return render_template('3-index.html')
 
