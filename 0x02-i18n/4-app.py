@@ -7,7 +7,7 @@ from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
 
-class Config:
+class Config(object):
     """Define Congig Class"""
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = "en"
