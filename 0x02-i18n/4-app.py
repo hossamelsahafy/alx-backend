@@ -4,10 +4,11 @@ Basic Flask app
 """
 
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext  # Importing gettext for translation
+from flask_babel import Babel, gettext
 
 
 class Config:
+    """Define Congig Class"""
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -19,9 +20,9 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_locale():
+def get_locale() -> str:
     """
-    Method that returns the best match
+        Method that returns the best match
     """
     locale = request.args.get('locale', '').strip()
     if locale and locale in Config.LANGUAGES:
@@ -33,7 +34,7 @@ babel.locale_selector_func = get_locale
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """
         Method that returns the template
     """
