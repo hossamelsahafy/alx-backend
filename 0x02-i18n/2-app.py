@@ -14,9 +14,9 @@ class Config(object):
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
-
 
 babel = Babel(app)
 
@@ -31,7 +31,7 @@ def get_locale():
 babel.locale_selector_func = get_locale
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() -> str:
     """
         Method that returns the template
