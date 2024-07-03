@@ -30,7 +30,7 @@ def get_locale() -> str:
 
 
 @app.route('/', strict_slashes=False)
-def index() ->  str:
+def index() -> str:
     """
         Method that returns the template
     """
