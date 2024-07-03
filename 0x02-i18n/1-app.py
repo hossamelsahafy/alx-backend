@@ -6,7 +6,7 @@
 from flask import Flask, render_template
 from flask_babel import Babel
 
-class Config():
+class Config(object):
     """Define Class Config"""
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = "en"
@@ -29,4 +29,4 @@ def index() -> str:
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run
