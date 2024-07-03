@@ -42,7 +42,7 @@ def get_locale() -> str:
 babel.locale_selector_func = get_locale
 
 
-def get_user():
+def get_user() -> Union[Dict[str, Union[str, None]], None]:
     """
         Returns a user dictionary or None if
         the ID cannot be found or if login_as was not passed.
@@ -55,7 +55,7 @@ def get_user():
 
 
 @app.before_request
-def before_request() -> Union[Dict[str, Union[str, None]], None]:
+def before_request():
     """
         Executes before each request
     """
@@ -67,7 +67,7 @@ def index() -> str:
     """
         Renders a basic html template
     """
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
