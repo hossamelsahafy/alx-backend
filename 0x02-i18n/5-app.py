@@ -6,6 +6,7 @@ from flask import Flask, request, render_template, g
 from flask_babel import Babel
 from typing import Union, Dict
 
+
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -29,6 +30,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+# @babel.localeselector
 def get_locale() -> str:
     """
         Gets locale from request object
