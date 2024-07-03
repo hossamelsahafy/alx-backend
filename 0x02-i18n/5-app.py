@@ -1,22 +1,10 @@
 #!/usr/bin/env python3
 """
-    Mock logging in
+A Basic flask application
 """
-from flask import Flask, render_template, request, g
-from flask_babel import Babel, gettext
-
-
-class Config(object):
-    """Define Config Class"""
-    LANGUAGES = ['en', 'fr']
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
-
-app = Flask(__name__)
-app.config.from_object(Config)
-
-babel = Babel(app)
-
+from flask import Flask, request, render_template, g
+from flask_babel import Babel
+from typing import Union, Dict
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -26,36 +14,61 @@ users = {
 }
 
 
-def get_user(user_id):
-    """Get User""" 
-    return users.get(user_id)
+class Config(object):
+    """
+    Define Config class
+    """
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
-@app.before_request
-def before_request():
-    """Before Request"""
-    login_as = request.args.get('login_as')
-    if login_as:
-        user_id = int(login_as)
-        g.user = get_user(user_id)
-    else:
-        g.user = None
 
-def get_locale():
-    """Get Locale"""
-    if g.user and g.user.get('locale'):
-        return g.user['locale']
-    return request.args.get('locale', Config.BABEL_DEFAULT_LOCALE)
+app = Flask(__name__)
+app.config.from_object(Config)
+
+babel = Babel(app)
+
+
+def get_locale() -> str:
+    """
+        Gets locale from request object
+    """
+    locale = request.args.get('locale', '').strip()
+    if locale and locale in Config.LANGUAGES:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 babel.locale_selector_func = get_locale
 
-@app.route('/')
+
+def get_user():
+    """
+        Returns a user dictionary or None if
+        the ID cannot be found or if login_as was not passed.
+    """
+    try:
+        user_id = int(request.args.get('login_as'))
+        return users.get(user_id)
+    except (TypeError, ValueError):
+        return None
+
+
+@app.before_request
+def before_request() -> Union[Dict[str, Union[str, None]], None]:
+    """
+        Executes before each request
+    """
+    g.user = get_user()
+
+
+@app.route('/', strict_slashes=False)
 def index() -> str:
-    """Return Template"""
-    if g.user:
-        return render_template('5-index.html', username=g.user['name'])
-    else:
-        return render_template('5-index.html', username=None)
+    """
+        Renders a basic html template
+    """
+    return render_template('4-index.html')
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run()
