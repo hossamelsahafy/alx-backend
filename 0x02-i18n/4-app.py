@@ -3,13 +3,11 @@
 Basic Flask app
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 
 
 class Config(object):
-    """
-    Define Config Class
-    """
+    """Define Congig Class"""
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -20,23 +18,25 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
-@babel.localeselector
-def get_locale() -> str:
-    """
-    Determine the best match for supported languages.
-    """
-    locale = request.args.get('locale')
-    if locale in app.config['LANGUAGES']:
-        return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+# @babel.localeselector
+def get_locale() -> str:  
+    """ Method that returns the best match """  
+    locale = request.args.get('locale')  
+    if locale and locale in app.config['LANGUAGES']:  
+        return locale  
+    return request.accept_languages.best_match(app.config['LANGUAGES'])  
+
+babel.locale_selector_func = get_locale
+
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-    Render the template for the home page.
+        Method that returns the template
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run
