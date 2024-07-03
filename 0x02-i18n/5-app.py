@@ -46,8 +46,9 @@ babel.locale_selector_func = get_locale
 
 def get_user() -> Optional[Dict[str, Optional[str]]]:
     """
-    Returns a user dictionary or None if the
-    ID cannot be found or if login_as was not passed.
+        Returns a user dictionary or None if the
+        ID cannot be found or if login_as
+        was not passed.
     """
     try:
         user_id = int(request.args.get('login_as'))
@@ -59,7 +60,7 @@ def get_user() -> Optional[Dict[str, Optional[str]]]:
 @app.before_request
 def before_request():
     """
-    Executes before each request
+        Executes before each request
     """
     g.user = get_user()
 
@@ -67,7 +68,7 @@ def before_request():
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-    Renders a basic html template
+        Renders a basic html template
     """
     return render_template('5-index.html')
 
