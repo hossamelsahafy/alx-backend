@@ -2,7 +2,6 @@
 """
 Basic Flask app
 """
-
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
@@ -20,6 +19,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+@babel.localeselector
 def get_locale() -> str:
     """
         Method that returns the best match
@@ -29,11 +29,10 @@ def get_locale() -> str:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+# babel.locale_selector_func = get_locale
 
-babel.locale_selector_func = get_locale
 
-
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() -> str:
     """
         Method that returns the template
