@@ -17,7 +17,7 @@ users = {
 
 class Config(object):
     """
-    Define Config class
+        Define Config class
     """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
@@ -30,9 +30,10 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+# @babel.localeselector
 def get_locale() -> str:
     """
-    Gets locale from request object
+        Gets locale from request object
     """
     locale = request.args.get('locale', '').strip()
     if locale and locale in Config.LANGUAGES:
