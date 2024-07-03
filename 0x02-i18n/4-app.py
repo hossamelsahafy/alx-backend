@@ -18,6 +18,7 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
+
 def get_locale():
     """
     Method that returns the best match
@@ -30,10 +31,11 @@ def get_locale():
 
 babel.locale_selector_func = get_locale
 
+
 @app.route('/')
 def index():
     """
-    Method that returns the template
+        Method that returns the template
     """
     return render_template('4-index.html')
 
