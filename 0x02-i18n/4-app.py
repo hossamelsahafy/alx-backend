@@ -8,7 +8,7 @@ from flask_babel import Babel
 
 class Config(object):
     """
-        Define Config Class
+    Define Config Class
     """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = "en"
@@ -20,21 +20,20 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
-
 @babel.localeselector
 def get_locale() -> str:
     """
-        Method that returns the best match
+    Determine the best match for supported languages.
     """
-    if 'locale' in request.args and request.args['locale'] in app.config['LANGUAGES']:
-        return request.args['locale']
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-        Method that returns the template
+    Render the template for the home page.
     """
     return render_template('3-index.html')
 
