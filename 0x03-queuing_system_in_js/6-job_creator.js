@@ -1,12 +1,11 @@
 import kue from 'kue';
-import redis from 'redis';
 
-const redisClient = redis.createClient();
-const queue = kue.createQueue({ redis: redisClient });
+// Create a Kue queue with default Redis configuration
+const queue = kue.createQueue();
 
 const jobData = {
-  phoneNumber: '123-456-7890',
-  message: 'Hello, this is a test notification',
+  phoneNumber: '4153518780',
+  message: 'This is the code to verify your account'
 };
 
 const job = queue.create('push_notification_code', jobData)
